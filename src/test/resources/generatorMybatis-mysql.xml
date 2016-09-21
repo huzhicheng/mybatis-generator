@@ -4,63 +4,51 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-<!--   <classPathEntry location="D:\maven-reponsitoy\mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar" />
- -->  <context id="MySqlTables" targetRuntime="MyBatis3">
-        <!--<property name="mergeable" value="true"></property>-->
-
+ <context id="MySqlTables" targetRuntime="MyBatis3">
     <plugin type="org.asia.mybatis.generator.plugins.PaginationPlugin" />
     <plugin type="org.asia.mybatis.generator.plugins.BatchInsertPlugin" />
     <plugin type="org.asia.mybatis.generator.plugins.SerializablePlugin" />
-
     <commentGenerator >
-    <!--<property name="suppressAllComments" value="true"/>-->
+
     <property name="suppressDate" value="true"/>
     </commentGenerator>
 
- <!--connectionURL="jdbc:mysql://127.0.0.1:3306/icare_test"  -->
-<!--     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                    connectionURL="jdbc:mysql://127.0.0.1:3306/icare_test"
+	<!-- 数据库链接 自己根据环境配置 -->
+	 <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                    connectionURL="jdbc:mysql://127.0.0.1:3306/dbtest"
                     userId="root"
-                    password="wozaidengni">
-    </jdbcConnection> -->
-    
-	<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                    connectionURL="jdbc:mysql://rm-2ze0twdr3q630ezdso.mysql.rds.aliyuncs.com:3306/icare_test"
-                    userId="ebanghu"
-                    password="ebanghu_com">
+                    password="password">
     </jdbcConnection>
-<!--     <javaTypeResolver >
-      <property name="forceBigDecimals" value="false" />
-    </javaTypeResolver> -->
+
     
     <javaTypeResolver type="MyJavaTypeResolverDefaultImpl">
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
   
-
-    <javaModelGenerator targetPackage="com.wisdom.dao.entity" targetProject="d:/test">
+	<!-- model生成  targetPackage为生成的包名  targetProject为文件所生成的目录-->
+    <javaModelGenerator targetPackage="com.fengzheng.dao.entity" targetProject="d:/test">
         <property name="enableSubPackages" value="true" />
         <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
+	<!-- mapperXML配置文件生成 -->
     <sqlMapGenerator targetPackage="mapper" targetProject="d:/test">
         <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
-    <javaClientGenerator type="XMLMAPPER" targetPackage="com.wisdom.dao.mapper"  targetProject="d:/test">
+   <!-- mapper接口生成 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.fengzheng.dao.mapper"  targetProject="d:/test">
         <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
 
+	<!-- 配置要生成mybatis 相关对象的表 -->
     <table schema="root" tableName="t_account" domainObjectName="Account" >
         <property name="useActualColumnNames" value="false"/>
-
         <generatedKey column="ID" sqlStatement="MySql" identity="true" />
     </table>
-    
-    
-   
+      
 
 </context>
 </generatorConfiguration>
